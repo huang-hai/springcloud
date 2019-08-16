@@ -1,0 +1,28 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: servicecloud-zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+
+zuul:
+  prefix: /huanghai  #设置统一公共前缀名
+  ignored-services: "*"   #"*"全部服务禁用真服务名访问  
+  #- servicecloud-dept 禁用单个服务真名访问
+  routes:
+    mydept.serviceId: servicecloud-dept
+    mydept.path: /mydept/**
+
+info:     #info信息监控查看
+  app.name: huanghai-servicecloud
+  company.name: www.huanghai.fun
+  build.artifactId: servicecloud-zuul-gateway-9527
+  build.version: 0.0.1-SNAPSHOT
